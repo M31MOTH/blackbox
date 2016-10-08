@@ -1561,6 +1561,9 @@ def __main__():
 				for i in lists:
 					i=i.strip()
 					scanner().lfi(i)
+		if (len(sys.argv)<=1):
+			print "help  : python2 blackbox.py -h/--help"
+			print "Usage : python2 blackbox.py {module} --help"
 if __name__ == '__main__':
 	try:
 		__main__()
