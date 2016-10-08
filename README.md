@@ -12,7 +12,6 @@
 + FTP Bruteforce       – Bruteforcing FTP LOGIN
 + SSH Bruteforce       – Bruteforcing SSH LOGIN
 + Admin Page Finder    – Find Admin Page
-+ Prestashop Exploit   – PrestaShop Arbitrary file Upload (6 Modules)
 + Dnsinfo              – dns info via Yougetsignal & viewdns & hackertarget
 + Magento Rce          – Magento eCommerce - Remote Code Execution
 + Joomla  Rce          – 1.5 - 3.4.5 remote code execution
