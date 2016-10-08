@@ -160,17 +160,29 @@ class scanner:
 			print color.R +" [~] WebKnight WAF Detected!"+color.ENDC
 			print color.R +" [~] Delaying 3 seconds between every request"+color.ENDC
 			time.sleep(3)
-		for params in url.split("?")[1].split("&"):
-			for payload in payloads:
-				bugs = url.replace(params, params + str(payload).strip())
-				request = useragent.open(bugs)
-				html = request.readlines()
-				for line in html:
-					checker = re.findall(check, line)
-					if len(checker) !=0:
-						print color.R+"\t[*] Payload : " ,payload +color.ENDC
-						print color.B+"\t[*] FOUND   : "+color.ENDC + bugs
-						vuln +=1
+		if "&" in url:
+			for params in url.split("?")[1].split("&"):
+				for payload in payloads:
+					bugs = url.replace(url, url + str(payload).strip())
+					request = useragent.open(bugs)
+					html = request.readlines()
+					for line in html:
+						checker = re.findall(check, line)
+						if len(checker) !=0:
+							print color.R+"\t[*] Payload : " ,payload +color.ENDC
+							print color.B+"\t[*] FOUND   : "+color.ENDC + bugs
+							vuln +=1
+		else:
+				for payload in payloads:
+					bugs = url.replace(url, url + str(payload).strip())
+					request = useragent.open(bugs)
+					html = request.readlines()
+					for line in html:
+						checker = re.findall(check, line)
+						if len(checker) !=0:
+							print color.R+"\t[*] Payload : " ,payload +color.ENDC
+							print color.B+"\t[*] FOUND   : "+color.ENDC + bugs
+							vuln +=1
 		if vuln == 0:
 			print color.G+"\t[!] Target is not vulnerable!"+color.ENDC
 		else:
@@ -1515,7 +1527,7 @@ def __main__():
 				for error in errors:
 					print (color.BOLD+error+color.ENDC)
 		if (arg=="scan_list"):
-			sl_hp = color.W+color.BOLD+sys.argv[0]+' scan_list -l/--list [PATH] --[LFI/SQLi/RCE/XSS]\nExample: '+sys.argv[0]+' scan_list /path/to/list --sqli'+color.ENDC
+			sl_hp = color.W+color.BOLD+sys.argv[0]+' scan_list -l/--list [PATH] --[LFI/SQLi/RCE/XSS]\nExample: '+sys.argv[0]+' scan_list -l/--lists /path/to/list --sqli'+color.ENDC
 			parser = OptionParser(usage=sl_hp)
 			parser.add_option("--lists","-l",
 				help="LIST COUNTAIN URLs !")
@@ -1571,4 +1583,4 @@ if __name__ == '__main__':
 		print (color.BOLD+color.Y+"Exiting Now !"+color.ENDC)
 		sys.exit(0)
 	except urllib2.HTTPError:
-		print (color.BOLD+color.Y+"Error, Retry Later ! (Urllib2 HTTPError)"+color.ENDC)
+		print (color.BOLD+color.Y+"Error, Retry Later !"+color.ENDC)
