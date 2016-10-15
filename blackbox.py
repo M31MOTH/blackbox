@@ -905,6 +905,7 @@ class cracker:
 		word = wordlist.readlines()
 		md5 = open(md5, "r")
 		md5 = md5.readlines()
+		var = 0
 		for i in word:
 			i=i.strip()
 			for o in md5:
@@ -912,6 +913,11 @@ class cracker:
 				wordlistmd5 = hashlib.md5(o).hexdigest()
 				if i==wordlistmd5:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 
@@ -923,6 +929,7 @@ class cracker:
 		word = wordlist.readlines()
 		sha1 = open(sha1, "r")
 		sha1 = sha1.readlines()
+		var=0
 		for i in word:
 			i=i.strip()
 			for o in sha1:
@@ -930,6 +937,11 @@ class cracker:
 				wordlistsha1 = hashlib.sha1(o).hexdigest()
 				if i==wordlistsha1:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass		
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha224(self, sha224, wordlist):
@@ -940,6 +952,7 @@ class cracker:
 		word = wordlist.readlines()
 		sha224 = open(sha224, "r")
 		sha224 = sha224.readlines()
+		var=0
 		for i in word:
 			i=i.strip()
 			for o in sha224:
@@ -947,6 +960,11 @@ class cracker:
 				wordlistsha1 = hashlib.sha224(o).hexdigest()
 				if i==wordlistsha1:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha256(self, sha256, wordlist):
@@ -957,6 +975,7 @@ class cracker:
 		word = wordlist.readlines()
 		sha256 = open(sha256, "r")
 		sha256 = sha256.readlines()
+		var=0
 		for i in word:
 			i=i.strip()
 			for o in sha256:
@@ -964,6 +983,11 @@ class cracker:
 				wordlistsha1 = hashlib.sha256(o).hexdigest()
 				if i==wordlistsha1:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass		
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha384(self, sha384, wordlist):
@@ -974,6 +998,7 @@ class cracker:
 		word = wordlist.readlines()
 		sha384 = open(sha384, "r")
 		sha384 = sha384.readlines()
+		var=0
 		for i in word:
 			i=i.strip()
 			for o in sha384:
@@ -981,6 +1006,11 @@ class cracker:
 				wordlistsha1 = hashlib.sha384(o).hexdigest()
 				if i==wordlistsha1:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass		
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha512(self, sha512, wordlist):
@@ -991,6 +1021,7 @@ class cracker:
 		word = wordlist.readlines()
 		sha512 = open(sha512, "r")
 		sha512 = sha512.readlines()
+		var=0
 		for i in word:
 			i=i.strip()
 			for o in sha512:
@@ -998,6 +1029,11 @@ class cracker:
 				wordlistsha1 = hashlib.sha512(o).hexdigest()
 				if i==wordlistsha1:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass		
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def ntlm(self,wordlist, ha):
@@ -1008,12 +1044,18 @@ class cracker:
 		wordlist = wordlist.readlines()
 		ha = open(ha, "r")
 		ha = ha.readlines()
+		var=0
 		for word in wordlist:
 			word=word.strip()
 			h = nthash.encrypt(word)
 			for has in ha:
 				if has == h:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass		
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def mssql2000(self,wordlist, ha):
@@ -1024,6 +1066,7 @@ class cracker:
 		wordlist = wordlist.readlines()
 		ha = open(ha, "r")
 		ha = ha.readlines()
+		var=0
 		for word in wordlist:
 			word=word.strip()
 			for has in ha:
@@ -1031,6 +1074,11 @@ class cracker:
 				h = m20.verify(has,word)
 				if h ==True:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass		
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def mssql2005(self,wordlist, ha):
@@ -1041,6 +1089,7 @@ class cracker:
 		wordlist = wordlist.readlines()
 		ha = open(ha, "r")
 		ha = ha.readlines()
+		var=0
 		for word in wordlist:
 			word=word.strip()
 			for has in ha:
@@ -1048,6 +1097,11 @@ class cracker:
 				h = m25.verify(has,word)
 				if h ==True:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 #mysql323
@@ -1059,6 +1113,7 @@ class cracker:
 		wordlist = wordlist.readlines()
 		ha = open(ha, "r")
 		ha = ha.readlines()
+		var=0
 		for word in wordlist:
 			word=word.strip()
 			for has in ha:
@@ -1066,6 +1121,11 @@ class cracker:
 				h = mysql323.verify(has,word)
 				if h ==True:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 #mysql41
@@ -1077,6 +1137,7 @@ class cracker:
 		wordlist = wordlist.readlines()
 		ha = open(ha, "r")
 		ha = ha.readlines()
+		var=0
 		for word in wordlist:
 			word=word.strip()
 			for has in ha:
@@ -1084,6 +1145,11 @@ class cracker:
 				h = mysql41.verify(has,word)
 				if h ==True:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def oracle11(self,wordlist, ha):
@@ -1094,6 +1160,7 @@ class cracker:
 		wordlist = wordlist.readlines()
 		ha = open(ha, "r")
 		ha = ha.readlines()
+		var=0
 		for word in wordlist:
 			word=word.strip()
 			for has in ha:
@@ -1101,6 +1168,11 @@ class cracker:
 				h = oracle11.verify(has,word)
 				if h ==True:
 					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					var+=1
+		if var==0:
+			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+		else:
+			pass
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 
@@ -1209,7 +1281,7 @@ def __main__():
 
 
 		if (arg=="google_dorker"):
-			gd_hp = color.W+color.BOLD+sys.argv[0]+' google_dorker -d/--dork="[DORK]" --level [NUMBER OF PAGE] --lfi [IF YOU WANT TO SCAN WEBSITE FROM LFI!]\nExample: '+sys.argv[0]+' google_dorker --dork="php?id=" --level 10 '+color.ENDC
+			gd_hp = color.W+color.BOLD+sys.argv[0]+' google_dorker -d/--dork="[DORK]" --level [NUMBER OF PAGE] --[LFI/RCE/XSS/SQLi!]\nExample: '+sys.argv[0]+' google_dorker --dork="php?id=" --level 10 '+color.ENDC
 			parser = OptionParser(usage=gd_hp)
 			parser.add_option("--dork","-d",
 				help="Dork for get URL")
@@ -1377,14 +1449,6 @@ def __main__():
 				crack.mysql41(mysql41,wordlist)
 			if oracle11 and wordlist:
 				crack.oracle11(oracle11,wordlist)
-			errors=[]
-			if (wordlist == None):
-				errors.append("[-] No WORLIST specified.")
-			if (md5 or sha1 or sha224 or sha256 or sha384 or sha512 or ntlm or mssql2000 or mssql2005 or mysql323 or mysql41 or oracle11 == None):
-				errors.append("[-] No PATH OF HASHs specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
 		if (arg=="-u" or arg=="--update"):
 			__update__()
 		if (arg=="presta_exploit"):
