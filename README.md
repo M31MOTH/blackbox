@@ -6,7 +6,7 @@
 
 ##### PASSWORD ATTACKs: #####
 
-+ MD5, SHA1, SHA224, SHA256, SHA384, SHA512, MSSQL2000, MSSQL2005, MYSQL323, MYSQL41, ORACLE11 CRACKER;
++ MD5, SHA1, SHA224, SHA256, SHA384, SHA512, MSSQL2000, MSSQL2005, MYSQL323, MYSQL41, ORACLE11 CRACKER
 
 ##### BRUTEFORCING : #####
 
@@ -20,7 +20,7 @@
 
 ##### INFORMATION GATHERING :
 
-+ ##### Dnsinfo              – dns info via Yougetsignal & viewdns & hackertarget
++ Dnsinfo              – dns info via Yougetsignal & viewdns & hackertarget
 
 ##### EXPLOIT : #####
 
