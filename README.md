@@ -10,27 +10,27 @@
 
 #### Bruteforcing : ####
 
-+ #### Wordpress Bruteforce – Bruteforce wordpress panel
++ ##### Wordpress Bruteforce – Bruteforce wordpress panel
 
-+ ####FTP Bruteforce       – Bruteforcing FTP LOGIN
++ ##### FTP Bruteforce       – Bruteforcing FTP LOGIN
 
-+ ####SSH Bruteforce       – Bruteforcing SSH LOGIN
++ ##### SSH Bruteforce       – Bruteforcing SSH LOGIN
 
-+ ####Admin Page Finder    – Find Admin Page
++ ##### Admin Page Finder    – Find Admin Page
 
 #### Information Gathering : ####
 
-+ Dnsinfo              – dns info via Yougetsignal & viewdns & hackertarget
++ ##### Dnsinfo              – dns info via Yougetsignal & viewdns & hackertarget
 
 #### Exploit : ####
-+ Magento Rce          – Magento eCommerce - Remote Code Execution
-+ Joomla  Rce          – 1.5 - 3.4.5 remote code execution
-+ Prestashop Exploit   – PrestaShop Arbitrary file Upload (9 Modules)
++ ##### Magento Rce          – Magento eCommerce - Remote Code Execution
++ ##### Joomla  Rce          – 1.5 - 3.4.5 remote code execution
++ ##### Prestashop Exploit   – PrestaShop Arbitrary file Upload (9 Modules)
 
 #### Web Hacking : ####
-+ Google Dorker        – google dorker (LFI/SQLi/XSS/RCE SCANNER)
-+ Bing Dorker          – bing dorker (LFI/SQLi/XSS/RCE SCANNER )
-+ Scan list            – Scan url in list from Vuln (SQLi/RCE/XSS/LFI)
++ ##### Google Dorker        – google dorker (LFI/SQLi/XSS/RCE SCANNER)
++ ##### Bing Dorker          – bing dorker (LFI/SQLi/XSS/RCE SCANNER )
++ ##### Scan list            – Scan url in list from Vuln (SQLi/RCE/XSS/LFI)
 
 ####Installation :
 ```bash
