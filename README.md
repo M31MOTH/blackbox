@@ -5,38 +5,26 @@
 [![Twitter](https://img.shields.io/badge/twitter-@blackeye-blue.svg?style=flat-square)](https://twitter.com/S44DH4T)
 
 ##### PASSWORD ATTACKs: #####
-
 + MD5, SHA1, SHA224, SHA256, SHA384, SHA512, MSSQL2000, MSSQL2005, MYSQL323, MYSQL41, ORACLE11 CRACKER
 
 ##### BRUTEFORCING : #####
-
-+ ##### Wordpress Bruteforce – Bruteforce wordpress panel
-
-+ ##### FTP Bruteforce       – Bruteforcing FTP LOGIN
-
-+ ##### SSH Bruteforce       – Bruteforcing SSH LOGIN
-
-+ ##### Admin Page Finder    – Find Admin Page
++ Wordpress Bruteforce – Bruteforce wordpress panel
++ FTP Bruteforce       – Bruteforcing FTP LOGIN
++ SSH Bruteforce       – Bruteforcing SSH LOGIN
++ Admin Page Finder    – Find Admin Page
 
 ##### INFORMATION GATHERING :
-
 + Dnsinfo              – dns info via Yougetsignal & viewdns & hackertarget
 
 ##### EXPLOIT : #####
-
-+ ##### Magento Rce          – Magento eCommerce - Remote Code Execution
-
-+ ##### Joomla  Rce          – 1.5 - 3.4.5 remote code execution
-
-+ ##### Prestashop Exploit   – PrestaShop Arbitrary file Upload (9 Modules)
++ Magento Rce          – Magento eCommerce - Remote Code Execution
++ Joomla  Rce          – 1.5 - 3.4.5 remote code execution
++ Prestashop Exploit   – PrestaShop Arbitrary file Upload (9 Modules)
 
 ##### WEB HACKING : #####
-
-+ ##### Google Dorker        – google dorker (LFI/SQLi/XSS/RCE SCANNER)
-
-+ ##### Bing Dorker          – bing dorker (LFI/SQLi/XSS/RCE SCANNER )
-
-+ ##### Scan list            – Scan url in list from Vuln (SQLi/RCE/XSS/LFI)
++ Google Dorker        – google dorker (LFI/SQLi/XSS/RCE SCANNER)
++ Bing Dorker          – bing dorker (LFI/SQLi/XSS/RCE SCANNER )
++ Scan list            – Scan url in list from Vuln (SQLi/RCE/XSS/LFI)
 
 ##### INSTALL :
 ```bash
