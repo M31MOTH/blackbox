@@ -4,9 +4,9 @@ if [ $(whoami) != "root" ];then
     exit 1
 fi
 cd ..
-pip install requests
-pip install passlib
-pip install pexpect
+pip2 install requests
+pip2 install passlib
+pip2 install pexpect
 cp -R blackbox/ /opt/
 echo '#!/bin/sh' > /bin/blackbox
 echo 'python2 /opt/blackbox/blackbox.py "$@"' >> /bin/blackbox
