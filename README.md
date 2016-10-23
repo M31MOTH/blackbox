@@ -32,4 +32,4 @@
 git clone https://github.com/darkeyepy/blackbox.git && cd blackbox && chmod +x install && sudo ./install && cd
 ```
 ##### SIMPLE TUTORIAL :
-[![TUTORIAL](https://asciinema.org/a/90291.png)](https://goo.gl/8mDvLx)
+[![asciicast](https://asciinema.org/a/90291.png)](https://asciinema.org/a/90291)
