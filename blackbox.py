@@ -1638,8 +1638,8 @@ def __main__():
 					i=i.strip()
 					scanner().lfi(i)
 		if (len(sys.argv)<=1):
-			print "help  : python2 blackbox.py -h/--help"
-			print "Usage : python2 blackbox.py {module} --help"
+			print color.B+color.BOLD+"+ -- --="+color.R+" [ "+color.W+"Help"+color.R+"  ] "+color.W+": python2 blackbox.py -h/--help"+color.ENDC
+			print color.B+color.BOLD+"+ -- --="+color.R+" [ "+color.W+"Usage"+color.R+" ] "+color.W+": python2 blackbox.py "+color.R+"{module}"+color.ENDC+" --help"+color.ENDC
 if __name__ == '__main__':
 	try:
 		__main__()
