@@ -7,7 +7,20 @@
 ### ADMIN PAGE FINDER  : https://packetstormsecurity.com/files/112855/Admin-Page-Finder-Script.html                          ###
 ### XSS/SQLI/RCE SCANNER FROM : https://github.com/zigoo0/webpwn3r !                                                         ###
 ################################################################################################################################
-import requests,json,sys, time, re, os, base64, random,hashlib,timeit,ftplib,pexpect,urllib2,urllib
+import requests
+import json
+import sys
+import time
+import re
+import os
+import base64 
+import random
+import hashlib
+import timeit
+import ftplib
+import pexpect
+import urllib2
+import urllib
 from sys import platform
 from time import gmtime, strftime
 from optparse import OptionParser
