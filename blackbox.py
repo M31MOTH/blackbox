@@ -30,7 +30,7 @@ from passlib.hash import mssql2000 as m20,oracle11 as oracle11,mssql2005 as m25,
 from pexpect import pxssh
 from ftplib import FTP
 __author__     = 'Saad Hat'
-__bitbucket__  = 'https://bitbucket.org/darkeye/'
+__github__     = 'https://bitbucket.org/darkeye/'
 __emailadd__   = 'blackdoor197@riseup.net'
 __twitter__    = 'https://twitter.com/S44DH4T'
 __version__    = '2.0'
