@@ -1187,16 +1187,6 @@ def __main__():
 			if url and username and wordlist:
 				BruteForce().wordpress(url, username, wordlist)
 				break
-			errors = []
-			if (url == None):
-				errors.append("[-] No URL specified.")
-			if (username == None):
-				errors.append("[-] No USERNAME specified.")
-			if (wordlist == None):
-				errors.append("[-] No WORDLIST path specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
 
 
 		if (arg == "dns_info"):
@@ -1221,14 +1211,6 @@ def __main__():
 				dnsinfo().viewdns(ip)
 			if ip and hackertarget==True:
 				dnsinfo().hackertarget(ip)
-			errors = []
-			if (ip == None):
-				errors.append("[-] No IP specified.")
-			if (viewdns or hackertarget or yougetsignal == None):
-				errors.append("[-] No SERVICE specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
 
 
 		if (arg=="rce_joomla"):
@@ -1240,13 +1222,6 @@ def __main__():
 			wordlist = options.wordlist
 			if wordlist:
 				exploit().joomla(wordlist)
-			errors = []
-			if (wordlist == None):
-				errors.append("[-] No WORDLIST specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
-
 
 		if (arg=="rce_magento"):
 			rm_hp = color.W+color.BOLD+sys.argv[0]+" rce_magento -w/--wordlist [SELECT PATH OF URLs SAVED IN WORDLIST]\nExample: "+sys.argv[0]+" rce_magento -w magento.txt"+color.ENDC
@@ -1257,18 +1232,14 @@ def __main__():
 			wordlist = options.wordlist
 			if wordlist:
 				exploit().magento(wordlist)
-			errors = []
-			if (wordlist == None):
-				errors.append("[-] No WORDLIST specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
 
 
 		if (arg=="google_dorker"):
 			gd_hp = color.W+color.BOLD+sys.argv[0]+' google_dorker -d/--dork="[DORK]" --level [NUMBER OF PAGE] --[LFI/RCE/XSS/SQLi!]\nExample: '+sys.argv[0]+' google_dorker --dork="php?id=" --level 10 '+color.ENDC
 			parser = OptionParser(usage=gd_hp)
 			parser.add_option("--dork","-d",
+				help="Dork for get URL")
+			parser.add_option("--lists","-l",
 				help="Dork for get URL")
 			parser.add_option("--level",type=int,default=10,
 				help="Number of page to stop")
@@ -1282,12 +1253,18 @@ def __main__():
 			help="Scan Founded website from XSS", action="store_true")
 			(options,args) = parser.parse_args()
 			dork = options.dork
+			lists=options.lists
 			level = options.level
 			lfi = options.lfi
 			sqli = options.sqli
 			rce = options.rce
 			xss = options.xss
-			if dork and level is not None: 
+			if lists and level is not None:
+				lists = open(lists, "r");lists=lists.readlines()
+				for dorks in lists:
+					dorks=dorks.strip()
+					dorker().google(dorks, 0, level)
+			if dork and level is not None:
 				dorker().google(dork, 0, level)
 			if dork and level is not None and lfi==True:
 				print (color.R+color.BOLD+"LFI Scanner : "+color.ENDC)
@@ -1313,15 +1290,6 @@ def __main__():
 				for urll in gurl:
 					urll= urll.strip()
 					scanner().xss(urll)
-			errors = []
-			if (dork == None):
-				errors.append("[-] No DORK specified.")
-			if (level == None):
-				errors.append("[-] No PAGE specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
-
 
 		if (arg=="bing_dorker"):
 			gd_hp = color.W+color.BOLD+sys.argv[0]+' bing_dorker --ip [IP OF TARGET] -d/--dork="[DORK]" --lfi [IF YOU WANT TO SCAN WEBSITE FROM LFI!]\nExample: '+sys.argv[0]+' bing_dorker --ip 192.xx.xxx.xxx --dork="php?id="'+color.ENDC
@@ -1370,14 +1338,6 @@ def __main__():
 				for urll in burl:
 					urll= urll.strip()
 					scanner().xss(urll)
-			errors = []
-			if (ip == None):
-				errors.append("[-] No IP specified.")
-			if (dork == None):
-				errors.append("[-] No DORK specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
 
 		if (arg=="hash_killer"):
 			hk_hp = color.W+color.BOLD+sys.argv[0]+' hash_killer -w/--wordlist [PATH OF WORDLIST] --md5 or --sha1 etc... [PATH OF HASHs]\nExample: '+sys.argv[0]+' -w /root/rockyou.txt --md5 hash.txt'+color.ENDC
@@ -1448,14 +1408,6 @@ def __main__():
 			script = options.script
 			if lists and script:
 				exploit().presta_run(lists,script)
-			errors=[]
-			if (lists == None):
-				errors.append("[-] No LISTS specified.")
-			if (script == None):
-				errors.append("[-] No SCRIPT BACKDOOR .php specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
 		if (arg=="ftp_brute"):
 			fb_hp = color.W+color.BOLD+sys.argv[0]+' ftp_brute --ip [IP ADDRESS] -u/--username [USERNAME OF FTP LOGIN] -w/--wordlist [PATH OF WORDLIST]\nExample: '+sys.argv[0]+' ftp_brute --ip 192.168.xxx.xx -u root -w password.txt'+color.ENDC
 			parser = OptionParser(usage=fb_hp)
@@ -1477,16 +1429,7 @@ def __main__():
 				for password in  wordlist:
 					password=password.strip()
 					BruteForce().ftp_brute(ip,username,password)
-			errors=[]
-			if (ip == None):
-				errors.append("[-] No IP specified.")
-			if (username == None):
-				errors.append("[-] No USERNAME specified.")
-			if (wordlist == None):
-				errors.append("[-] No WORDLIST specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
+
 		if (arg=="ssh_brute"):
 			sb_hp = color.W+color.BOLD+sys.argv[0]+' ssh_brute --ip [IP ADDRESS] -u/--username [USERNAME OF SSH LOGIN] -w/--wordlist [PATH OF WORDLIST]\nExample: '+sys.argv[0]+' ssh_brute --ip 192.168.xxx.xx -u root -w password.txt'+color.ENDC
 			parser = OptionParser(usage=sb_hp)
@@ -1508,16 +1451,8 @@ def __main__():
 				for password in  wordlist:
 					password=password.strip()
 					BruteForce().ssh_brute(ip,username,password)
-			errors=[]
-			if (ip == None):
-				errors.append("[-] No IP specified.")
-			if (username == None):
-				errors.append("[-] No USERNAME specified.")
-			if (wordlist == None):
-				errors.append("[-] No WORDLIST specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
+
+
 		if (arg=="admin_brute"):
 			ab_hp = color.W+color.BOLD+sys.argv[0]+' admin_brute -u/--url [URL] --php --asp --cfm etc... [WEB]\nExample: '+sys.argv[0]+' admin_brute http://google.com --php'+color.ENDC
 			parser = OptionParser(usage=ab_hp)
@@ -1567,14 +1502,7 @@ def __main__():
 				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
 				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : BRF"+color.ENDC)
 				admin_finder().brf_admin(url)
-			errors=[]
-			if (ip == None):
-				errors.append("[-] No IP specified.")
-			if (php or asp or cfm or js or cgi or brf == None):
-				errors.append("[-] No SCRIPT specified.")
-			if (len(errors) > 0):
-				for error in errors:
-					print (color.BOLD+error+color.ENDC)
+
 		if (arg=="scan_list"):
 			sl_hp = color.W+color.BOLD+sys.argv[0]+' scan_list -l/--list [PATH] --[LFI/SQLi/RCE/XSS]\nExample: '+sys.argv[0]+' scan_list -l/--lists /path/to/list --sqli'+color.ENDC
 			parser = OptionParser(usage=sl_hp)
