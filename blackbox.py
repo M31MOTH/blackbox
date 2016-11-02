@@ -1288,6 +1288,7 @@ def __main__():
 				for urll in gurl:
 					urll= urll.strip()
 					scanner().xss(urll)
+
 			if dork and level is not None:
 				dorker().google(dork, 0, level)
 			if dork and level is not None and lfi==True:
@@ -1363,6 +1364,35 @@ def __main__():
 					urll= urll.strip()
 					scanner().xss(urll)
 
+			if ip and lists:
+				lists = open(lists, "r");lists=lists.readlines()
+				for dorks in lists:
+					dorks=dorks.strip()
+					dorker().bing(ip, dorks)
+			if ip and lists and sqli==True:
+				print (color.R+color.BOLD+"SQLi Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().sqli(urll)
+			if ip and lists and lfi==True:
+				print (color.R+color.BOLD+"LFI Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().lfi(urll)
+			if ip and lists and rce==True:
+				print (color.R+color.BOLD+"RCE Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().rce(urll)
+			if ip and lists and xss==True:
+				print (color.R+color.BOLD+"XSS Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().xss(urll)
 		if (arg=="hash_killer"):
 			hk_hp = color.W+color.BOLD+sys.argv[0]+' hash_killer -w/--wordlist [PATH OF WORDLIST] --md5 or --sha1 etc... [PATH OF HASHs]\nExample: '+sys.argv[0]+' -w /root/rockyou.txt --md5 hash.txt'+color.ENDC
 			parser = OptionParser(usage=hk_hp)
