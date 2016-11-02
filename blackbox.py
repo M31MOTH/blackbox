@@ -1264,6 +1264,30 @@ def __main__():
 				for dorks in lists:
 					dorks=dorks.strip()
 					dorker().google(dorks, 0, level)
+			if lists and level is not None and sqli==True:
+				print (color.R+color.BOLD+"SQLi Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().sqli(urll)
+			if lists and level is not None and lfi==True:
+				print (color.R+color.BOLD+"LFI Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().lfi(urll)
+			if lists and level is not None and rce==True:
+				print (color.R+color.BOLD+"RCE Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().rce(urll)
+			if lists and level is not None and xss==True:
+				print (color.R+color.BOLD+"XSS Scanner : "+color.ENDC)
+				gurl= dorker().gurl
+				for urll in gurl:
+					urll= urll.strip()
+					scanner().xss(urll)
 			if dork and level is not None:
 				dorker().google(dork, 0, level)
 			if dork and level is not None and lfi==True:
