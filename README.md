@@ -20,6 +20,8 @@
 + Magento Rce          – Magento eCommerce - Remote Code Execution
 + Joomla  Rce          – 1.5 - 3.4.5 remote code execution
 + Prestashop Exploit   – PrestaShop Arbitrary file Upload (9 Modules)
++ PhpmoAdmin Rce       – Exploit for phpMoAdmin, CVE-2015-2208
++ ElasticSearch rce    – Exploit for ElasticSearch , {CVE-2015-1427}
 
 ##### WEB HACKING : #####
 + Google Dorker        – google dorker (LFI/SQLi/XSS/RCE SCANNER)
