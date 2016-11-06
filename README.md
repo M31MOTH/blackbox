@@ -1,4 +1,4 @@
-### BLACKBOx Tool ###
+### BLACKBOx Penetration Testing Framework ###
 
 [![Python 2.7](https://img.shields.io/badge/python-2.7-yellow.svg?style=flat-square)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv2-red.svg?style=flat-square)](https://raw.githubusercontent.com/darkeyepy/blackbox/master/COPYING)
