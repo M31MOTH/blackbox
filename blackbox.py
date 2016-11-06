@@ -22,7 +22,7 @@ __author__     = 'Saad Hat'
 __github__     = 'https://bitbucket.org/darkeye/'
 __emailadd__   = 'blackdoor197@riseup.net'
 __twitter__    = 'https://twitter.com/S44DH4T'
-__version__    = '2.0'
+__version__    = '2.2'
 __license__    = 'GPLv2'
 __scrname__    = 'BLACKBOx v%s' % (__version__)
 
