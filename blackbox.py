@@ -76,7 +76,7 @@ class color:
 	if sys.platform == 'win32':
 		P    =  '' # purple
 		B    =  '' # Blue
-		BOLD =  ''  # Bold
+		BOLD =  '' # Bold
 		G    =  '' # Green
 		Y    =  '' # Yellow
 		R    =  '' # Red
@@ -1065,8 +1065,8 @@ class dnsinfo:
 class cracker:
 	def md5(self, md5, wordlist):
 		start = timeit.default_timer()
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MD5 HASH PATH : "+md5+color.ENDC)
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" MD5 HASH PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH : "+md5+color.ENDC)
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
 		md5 = open(md5, "r")
@@ -1088,8 +1088,8 @@ class cracker:
 		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 
 	def sha1(self, sha1, wordlist):
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA1 HASH PATH : "+sha1+color.ENDC)
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA1 HASH PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH  : "+sha1+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -1111,8 +1111,8 @@ class cracker:
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha224(self, sha224, wordlist):
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA224 HASH PATH : "+sha224+color.ENDC)
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA224 HASH PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+sha224+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -1134,8 +1134,8 @@ class cracker:
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha256(self, sha256, wordlist):
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA256 HASH PATH : "+sha256+color.ENDC)
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA256 HASH PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+sha256+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -1157,8 +1157,8 @@ class cracker:
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha384(self, sha384, wordlist):
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA384 HASH PATH : "+sha384+color.ENDC)
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA384 HASH PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+sha384+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -1180,8 +1180,8 @@ class cracker:
 		stop = timeit.default_timer()
 		print (color.BL+color.BOLD+"{+}"+color.ENDC+color.BOLD+" Elapsed Time : "+str(stop - start)+"s"+color.ENDC)
 	def sha512(self, sha512, wordlist):
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA512 HASH PATH : "+sha512+color.ENDC)
-		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" SHA512 HASH PATH : "+wordlist+color.ENDC)
+		print (color.Y+color.BOLD+"{+}"+color.ENDC+color.BOLD+" WORDLIST PATH    : "+sha512+color.ENDC)
 		start = timeit.default_timer()
 		wordlist = open(wordlist, "r")
 		word = wordlist.readlines()
@@ -1681,7 +1681,7 @@ def __main__():
 			oracle11       = options.oracle11
 			crack = cracker()
 			if md5 and wordlist:
-				crack.md5(wordlist, md5)
+				crack.md5(wordlist,md5)
 			if sha1 and wordlist:
 				crack.sha1(wordlist, sha1)
 			if sha224 and wordlist:
