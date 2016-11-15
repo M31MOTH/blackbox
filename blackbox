@@ -1,2 +1,2 @@
 #!/bin/sh
-python2 /usr/bin/blackbox.py "$@"
+python2 /opt/blackbox.py "$@"
