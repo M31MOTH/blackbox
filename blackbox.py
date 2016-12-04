@@ -1762,7 +1762,7 @@ def __main__():
 
 
 		if (arg=="admin_brute"):
-			ab_hp = color.W+color.BOLD+sys.argv[0]+' admin_brute -u/--url [URL] --php --asp --cfm etc... [WEB]\nExample: '+sys.argv[0]+' admin_brute http://google.com --php'+color.ENDC
+			ab_hp = color.W+color.BOLD+sys.argv[0]+' admin_brute -u/--url [URL] --php --asp --cfm etc... [WEB]\nExample: '+sys.argv[0]+' admin_brute -u http://google.com --php'+color.ENDC
 			parser = OptionParser(usage=ab_hp)
 			parser.add_option("--url","-u",
 				help="URL FOR GET ADMIN PANEL")
